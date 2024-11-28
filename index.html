@@ -18,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* Chat Container */
     .container {
       max-width: 600px;
       width: 90%;
@@ -29,7 +28,6 @@
       border: 2px solid #003566; /* Slightly brighter blue border */
     }
 
-    /* Title */
     h1 {
       text-align: center;
       font-size: 1.8rem;
@@ -37,7 +35,6 @@
       margin-bottom: 20px;
     }
 
-    /* Input Fields */
     input[type="text"] {
       width: 100%;
       padding: 12px;
@@ -58,7 +55,6 @@
       border: 1px solid #00aaff; /* Brighter blue focus border */
     }
 
-    /* Chat Box */
     .chat-container {
       max-height: 300px;
       overflow-y: auto;
@@ -81,7 +77,6 @@
       color: #82caff; /* Softer blue for bot messages */
     }
 
-    /* Buttons */
     button {
       padding: 12px 20px;
       background-color: #00509e; /* Rich blue */
@@ -103,7 +98,6 @@
       cursor: not-allowed;
     }
 
-    /* Scrollbar Styling */
     .chat-container::-webkit-scrollbar {
       width: 8px;
     }
@@ -121,31 +115,23 @@
 <body>
   <div class="container">
     <h1>AI Chatbot</h1>
-    <div id="api-key-section">
-      <label for="api-key">Enter your GROQ API Key:</label>
-      <input type="text" id="api-key" placeholder="API Key">
-    </div>
     <div class="chat-container" id="chat-container">
-      <p class="bot">Error: Error with API request</p>
+      <p class="bot">Welcome! How can I assist you today?</p>
     </div>
     <input type="text" id="user-input" placeholder="Type your message...">
     <button id="send-btn">Send</button>
   </div>
 
   <script>
-    const apiKeyInput = document.getElementById('api-key');
+    // Predefined API Key
+    const predefinedApiKey = "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";
+
     const chatContainer = document.getElementById('chat-container');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
 
     sendBtn.addEventListener('click', () => {
-      const apiKey = apiKeyInput.value.trim();
       const userMessage = userInput.value.trim();
-
-      if (!apiKey) {
-        alert('Please enter your API key.');
-        return;
-      }
 
       if (!userMessage) {
         alert('Please type a message.');
@@ -158,13 +144,13 @@
       userMessageElement.className = 'user';
       chatContainer.appendChild(userMessageElement);
 
-      // Fake response for demo purposes
+      // Fake API call and bot response (replace with real API logic)
       const botMessageElement = document.createElement('p');
-      botMessageElement.textContent = 'Error: Error with API request';
+      botMessageElement.textContent = `API Key Used: ${predefinedApiKey} | Response: Sorry, I am a demo.`;
       botMessageElement.className = 'bot';
       chatContainer.appendChild(botMessageElement);
 
-      // Clear the input
+      // Clear the input field
       userInput.value = '';
     });
   </script>
