@@ -1,4 +1,4 @@
-const predefinedApiKey = "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"; // Replace with your actual API key
+const predefinedApiKey = "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"; // Replace with your actual API key
 
 const chatContainer = document.getElementById('chat-container');
 const userInput = document.getElementById('user-input');
