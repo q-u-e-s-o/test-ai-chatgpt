@@ -124,7 +124,7 @@
 
   <script>
     // Predefined API Key
-    const predefinedApiKey = "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";
+    const predefinedApiKey = "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";
 
     const chatContainer = document.getElementById('chat-container');
     const userInput = document.getElementById('user-input');
@@ -144,11 +144,60 @@
       userMessageElement.className = 'user';
       chatContainer.appendChild(userMessageElement);
 
-      // Fake API call and bot response (replace with real API logic)
-      const botMessageElement = document.createElement('p');
-      botMessageElement.textContent = `API Key Used: ${predefinedApiKey} | Response: Sorry, I am a demo.`;
-      botMessageElement.className = 'bot';
-      chatContainer.appendChild(botMessageElement);
+      sendBtn.addEventListener('click', async () => {
+  const userMessage = userInput.value.trim();
+
+  if (!userMessage) {
+    alert('Please type a message.');
+    return;
+  }
+
+  // Display user's message
+  const userMessageElement = document.createElement('p');
+  userMessageElement.textContent = userMessage;
+  userMessageElement.className = 'user';
+  chatContainer.appendChild(userMessageElement);
+
+  // Clear the input field
+  userInput.value = '';
+
+  // Fetch bot's response from the API
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${predefinedApiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo", // Use gpt-4 if your key supports it
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+          { role: "user", content: userMessage },
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Display bot's response
+    const botMessageElement = document.createElement('p');
+    botMessageElement.textContent = data.choices[0].message.content;
+    botMessageElement.className = 'bot';
+    chatContainer.appendChild(botMessageElement);
+  } catch (error) {
+    // Handle errors
+    const botMessageElement = document.createElement('p');
+    botMessageElement.textContent = `Error: ${error.message}`;
+    botMessageElement.className = 'bot';
+    chatContainer.appendChild(botMessageElement);
+  }
+});
+
 
       // Clear the input field
       userInput.value = '';
