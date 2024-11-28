@@ -72,7 +72,7 @@
   <div class="container">
     <h1>AI Chatbot</h1>
     <div id="api-key-section">
-      <label for="api-key">Enter your GROQ API Key:</label>
+      <label for="api-key">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</label>
       <input type="text" id="api-key" placeholder="API Key">
     </div>
     <div class="chat-container" id="chat-container"></div>
@@ -109,7 +109,7 @@
 
       try {
         // Call GROQ API
-        const response = await fetch('https://your-groq-api-endpoint', {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
